@@ -4,6 +4,8 @@
 #ifndef HEXABOT_VECTOR3_H
 #define HEXABOT_VECTOR3_H
 
+#include <iostream>
+
 using namespace std;
 
 class Vector3 {
@@ -15,10 +17,11 @@ public:
     Vector3();
     Vector3(double, double, double);
     Vector3 dot(Vector3);
-    Vector3 operator*(const Vector3& v);
-    Vector3 operator/(const Vector3& v);
-    Vector3 operator+(const Vector3& v);
-    Vector3 operator-(const Vector3& v);
+    friend Vector3 operator*(const Vector3&, const Vector3&);
+    friend Vector3 operator/(const Vector3&, const Vector3&);
+    friend Vector3 operator+(const Vector3&, const Vector3&);
+    friend Vector3 operator-(const Vector3&, const Vector3&);
+    friend ostream& operator<<(ostream&, const Vector3&);
 };
 
 
