@@ -7,7 +7,10 @@ Vector3 v3;
 
 void setup() {
     Serial.begin(115200);
-    while(!Serial.available());
+    while(!Serial);
+    delay(1000);
+
+    pinMode(LED_BUILTIN, OUTPUT);
 
     v3 = v1 + v2;
     Serial.printf("%f %f %f\n",v3.x,v3.y,v3.z);
@@ -21,4 +24,8 @@ void setup() {
 }
 
 void loop() {
+    digitalWrite(LED_BUILTIN, HIGH); // turn the onboard LED on and wait one second
+    delay(1000);
+    digitalWrite(LED_BUILTIN, LOW); // turn the onboard LED off and wait one second
+    delay(1000);
 }
