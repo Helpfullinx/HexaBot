@@ -54,22 +54,38 @@ void setup() {
 
     pinMode(LED_BUILTIN, OUTPUT);
 
-    TaskHandle_t Lerp;
-    xTaskCreatePinnedToCore(vLerpTask,"Lerp",10000,NULL,1,&Lerp,0);
-
-    TaskHandle_t ChangeLerpTarget;
-    xTaskCreatePinnedToCore(vChangeLerpTarget, "Print", 10000, NULL, 0, &ChangeLerpTarget, 1);
-
-    TaskHandle_t Print;
-    xTaskCreatePinnedToCore(vPrint, "Print", 10000, NULL, 0, &Print, 1);
+//    TaskHandle_t Lerp;
+//    xTaskCreatePinnedToCore(vLerpTask,"Lerp",10000,NULL,1,&Lerp,0);
+//
+//    TaskHandle_t ChangeLerpTarget;
+//    xTaskCreatePinnedToCore(vChangeLerpTarget, "Print", 10000, NULL, 0, &ChangeLerpTarget, 1);
+//
+//    TaskHandle_t Print;
+//    xTaskCreatePinnedToCore(vPrint, "Print", 10000, NULL, 0, &Print, 1);
+    pwm1.writeMicroseconds(0, 1000); // Turn servo for 1000us
 }
 
+void MoveMotor(uint8_t *pin ) {
+    for (uint16_t pulselength = SERVOMIN; pulselength < SERVOMAX; pulselength++) {
+        pwm1.setPWM(*pin, 0, pulselength);
+    }
+}
 
 void loop() {
-    digitalWrite(LED_BUILTIN, HIGH); // turn the onboard LED on and wait one second
-    delay(1000);
-    Serial.printf("%f %f %f\n", v1.x, v1.y, v1.z);
-    digitalWrite(LED_BUILTIN, LOW); // turn the onboard LED off and wait one second
-    delay(1000);
-    Serial.printf("%f %f %f\n", v1.x, v1.y, v1.z);
+//        digitalWrite(LED_BUILTIN, HIGH); // turn the onboard LED on and wait one second
+//        delay(200);
+//        Serial.printf("%f %f %f\n", v1.x, v1.y, v1.z);
+//        delay(1500);
+//
+//        for (uint16_t pulselength = SERVOMIN; pulselength < SERVOMAX; pulselength++) {
+//            pwm1.setPWM(pin, 0, pulselength);
+//        }
+//
+//        for (uint16_t pulselength = SERVOMAX; pulselength > SERVOMIN; pulselength--) {
+//            pwm1.setPWM(pin, 0, pulselength);
+//        }
+//
+//        digitalWrite(LED_BUILTIN, LOW); // turn the onboard LED off and wait one second
+//        delay(200);
+//        Serial.printf("%f %f %f\n", v1.x, v1.y, v1.z);
 }
