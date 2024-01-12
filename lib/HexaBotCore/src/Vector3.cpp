@@ -7,7 +7,7 @@ Vector3::Vector3() {
     z = 0.0;
 }
 
-Vector3::Vector3(double x, double y, double z) {
+Vector3::Vector3(float x, float y, float z) {
     this->x = x;
     this->y = y;
     this->z = z;
@@ -19,7 +19,7 @@ Vector3::Vector3(double x, double y, double z) {
  * @return Returns back the dotproduct between the pair of Vector3 points
  * */
 
-double Vector3::dot(Vector3& v1, Vector3& v2) {
+float Vector3::dot(Vector3& v1, Vector3& v2) {
     return (v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z);
 }
 

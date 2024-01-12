@@ -2,17 +2,30 @@
 #define HEXABOT_LEG_H
 
 #include <list>
-#include "Segment.h"
+#include "Vector3.h"
+#include "Util.h"
+
 using namespace std;
+
+struct Segment{
+    // Length of the segment
+    float length;
+    // Angle of the servo at the base of this segment
+    float angle;
+
+    Segment( const float f1, const float f2 ) {
+        length = f1;
+        angle = f2;
+    };
+};
 
 class Leg {
 public:
-    list<Segment*> segments;
-    Vector3* iktarget;
-    Leg(Vector3&);
-    void AddSegmentToEnd(Segment&);
+    Segment* segments[3];
+    Vector3 ikTarget = Vector3();
+
+    Leg();
     void CalculateIK();
 };
-
 
 #endif //HEXABOT_LEG_H

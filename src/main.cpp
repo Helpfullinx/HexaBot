@@ -42,7 +42,7 @@ void setup() {
     Serial.begin(115200);
     while(!Serial);
 
-    pwm1.begin(); // initialize i2c with first servo controller
+/*    pwm1.begin(); // initialize i2c with first servo controller
     pwm1.setOscillatorFrequency(27000000);
     pwm1.setPWMFreq(SERVO_FREQ);  // Analog servos run at ~50 Hz updates
 
@@ -54,15 +54,19 @@ void setup() {
 
     pinMode(LED_BUILTIN, OUTPUT);
 
-//    TaskHandle_t Lerp;
-//    xTaskCreatePinnedToCore(vLerpTask,"Lerp",10000,NULL,1,&Lerp,0);
-//
-//    TaskHandle_t ChangeLerpTarget;
-//    xTaskCreatePinnedToCore(vChangeLerpTarget, "Print", 10000, NULL, 0, &ChangeLerpTarget, 1);
-//
-//    TaskHandle_t Print;
-//    xTaskCreatePinnedToCore(vPrint, "Print", 10000, NULL, 0, &Print, 1);
-    pwm1.writeMicroseconds(0, 1000); // Turn servo for 1000us
+    TaskHandle_t Lerp;
+    xTaskCreatePinnedToCore(vLerpTask,"Lerp",10000,NULL,1,&Lerp,0);
+
+    TaskHandle_t ChangeLerpTarget;
+    xTaskCreatePinnedToCore(vChangeLerpTarget, "Print", 10000, NULL, 0, &ChangeLerpTarget, 1);
+
+    TaskHandle_t Print;
+    xTaskCreatePinnedToCore(vPrint, "Print", 10000, NULL, 0, &Print, 1);
+    pwm1.writeMicroseconds(0, 1000); // Turn servo for 1000us*/
+
+    bot = MainBot();
+
+
 }
 
 void MoveMotor(uint8_t *pin ) {
@@ -88,4 +92,8 @@ void loop() {
 //        digitalWrite(LED_BUILTIN, LOW); // turn the onboard LED off and wait one second
 //        delay(200);
 //        Serial.printf("%f %f %f\n", v1.x, v1.y, v1.z);
+
+
+
+    Serial.printf("%p %p \n", bot.coxa.tail, bot.tibia.head);
 }

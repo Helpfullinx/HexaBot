@@ -9,6 +9,7 @@ using namespace std;
 class Body {
 public:
     list<Leg*> legs;
+
     Body();
     void CalculateAllIK();
     void AddLeg(Leg&);

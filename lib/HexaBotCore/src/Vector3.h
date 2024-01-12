@@ -7,23 +7,23 @@ using namespace std;
 
 class Vector3 {
 public:
-    double x;
-    double y;
-    double z;
+    float x;
+    float y;
+    float z;
 
     Vector3();
-    Vector3(double, double, double);
+    Vector3(float, float, float);
     static void lerp(Vector3&, Vector3&, int, int);
-    inline static double dot(Vector3&, Vector3&);
+    inline static float dot(Vector3&, Vector3&);
     inline friend Vector3 operator*(const Vector3&, const Vector3&);
     inline friend Vector3 operator/(const Vector3&, const Vector3&);
     inline friend Vector3 operator+(const Vector3&, const Vector3&);
     inline friend Vector3 operator+=(Vector3&, const Vector3&);
     inline friend Vector3 operator-(const Vector3&, const Vector3&);
     inline friend Vector3 operator*(const Vector3&, float);
-    inline friend Vector3 operator/(const Vector3&, const float);
-    inline friend Vector3 operator+(const Vector3&, const float);
-    inline friend Vector3 operator-(const Vector3&, const float);
+    inline friend Vector3 operator/(const Vector3&, float);
+    inline friend Vector3 operator+(const Vector3&, float);
+    inline friend Vector3 operator-(const Vector3&, float);
     inline friend bool operator==(const Vector3&, const Vector3&);
     inline friend bool operator!=(const Vector3&, const Vector3&);
 };
