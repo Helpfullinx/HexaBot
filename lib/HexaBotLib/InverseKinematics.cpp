@@ -1,7 +1,5 @@
 #include "InverseKinematics.h"
 
-using namespace BLA;
-
 // Performs inverse kinematics to get the angles of each segment, given the end effector.
 void inverseKinematics(const float &x, const float &y, const float &z, float &theta1, float &theta2, float &theta3) {
     theta1 = atan2(y, x);
@@ -52,25 +50,4 @@ void rotationMatrix(const float &roll, const float &pitch, const float &yaw, con
 
     // Matrix dot product must be x and y first, then z, then leg angles (from right to left).
     R = R_leg * R_z * R_x * R_y;
-}
-
-void transformAndIK(const Transforms::Point &bodyPos, const Transforms::EulerRotation &rotation, const Transforms::Point startPositions[], const Transforms::Point endPositions[], const int &duration, const int &steps) {
-    BLA::Matrix<3,3> R;
-
-    for (int i = 0; i < LEG_COUNT; i++) {
-        float legAngle = legAngle[i];
-        rotationMatrix(rotation(0), rotation(1), rotation(2), legAngle, R);
-
-        Transforms::Point startPos = startPositions[i];
-        Transforms::Point endPos = endPositions[i];
-        Transforms::Point attachmentPoint = attachmentPoint[i];
-
-        Transforms::Point startPosVec = startPos - bodyPos;
-        Transforms::Point endPosVec = endPos - bodyPos;
-
-        Transforms::Point startPosTransformed = R * startPosVec + attachmentPoint;
-        Transforms::Point endPosTransformed = R * endPosVec + attachmentPoint;
-
-        Transforms::moveLeg(i, startPosTransformed, endPosTransformed, duration, steps);
-    }
 }

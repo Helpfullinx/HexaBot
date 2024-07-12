@@ -32,6 +32,13 @@ void loop() {
             {0, 0, 0}
     };
 
-    transformAndIK(bodyPos, bodyOrientation, startPositions, endPositions, 2000, 50);
+    Transformation t = {
+            bodyPos,
+            bodyOrientation,
+            startPositions,
+            endPositions
+    };
+
+    moveLegs(t, 2000, 50);
 
 }
