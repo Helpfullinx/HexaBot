@@ -1,5 +1,7 @@
 #include "main.h"
 
+uint8_t servonum = 1;
+
 void setup() {
     Serial.begin(115200);
     while(!Serial.available());
@@ -7,12 +9,6 @@ void setup() {
     Serial.println("Initializing servos...");
 
     servoSetup();
-
-}
-
-void loop() {
-    Point bodyPos = {0, 0, 0};
-    EulerRotation bodyOrientation = {0, 0, 0};
 
     Point startPositions[LEG_COUNT] = {
             {100, 100, 0},
@@ -32,6 +28,9 @@ void loop() {
             {0, 0, 0}
     };
 
+    Point bodyPos = {0, 0, 0};
+    EulerRotation bodyOrientation = {0, 0, 0};
+
     Transformation t = {
             bodyPos,
             bodyOrientation,
@@ -39,6 +38,25 @@ void loop() {
             endPositions
     };
 
-    moveLegs(t, 2000, 50);
+
+    moveLegs(t, 10000, 50);
+}
+
+void loop() {
+
+
+    // Drive each servo one at a time using setPWM()
+//    Serial.printf("Servo_Min = %i", SERVO_MIN);
+//    Serial.printf("Servo_Max = %i", SERVO_MAX);
+//    for (uint16_t pulselen = SERVO_MIN; pulselen < SERVO_MAX; pulselen++) {
+//        pwm1.setPWM(servonum, 0, pulselen);
+//    }
+//
+//    delay(500);
+//    for (uint16_t pulselen = SERVO_MAX; pulselen > SERVO_MIN; pulselen--) {
+//        pwm1.setPWM(servonum, 0, pulselen);
+//    }
+//
+//    delay(500);
 
 }

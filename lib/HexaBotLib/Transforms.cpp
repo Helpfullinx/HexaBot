@@ -1,5 +1,8 @@
 #include "Transforms.h"
 
+Adafruit_PWMServoDriver pwm1 = Adafruit_PWMServoDriver(0x40);
+Adafruit_PWMServoDriver pwm2 = Adafruit_PWMServoDriver(0x41);
+
 
 void servoSetup() {
     pwm1.begin();
@@ -15,7 +18,7 @@ void servoSetup() {
 }
 
 
-void setServoAngle(const uint8_t &servoNum, float &angle) {
+void setServoAngle(uint8_t servoNum, float angle) {
     // Ensure angle is within the valid range
     if (angle < ANGLE_MIN) angle = ANGLE_MIN;
     if (angle > ANGLE_MAX) angle = ANGLE_MAX;
@@ -67,13 +70,13 @@ void moveLegs(const Transformation &ts, const int &duration, const int &steps) {
             int servoBase = i * 3 + 1;  // Assuming servos are numbered sequentially
 
             // Set the servo angles
-            Serial.printf("%d, %f\n", servoBase, theta1);
-            Serial.printf("%d, %f\n", servoBase + 1, theta2);
-            Serial.printf("%d, %f\n", servoBase + 2, theta3);
-//
-//            setServoAngle(servoBase, theta1);  // Coxa angle
-//            setServoAngle(servoBase + 1, theta2);  // Femur angle
-//            setServoAngle(servoBase + 2, theta3);  // Tibia angle
+            Serial.printf("%d, %f\n\r", servoBase, theta1);
+            Serial.printf("%d, %f\n\r", servoBase + 1, theta2);
+            Serial.printf("%d, %f\n\r", servoBase + 2, theta3);
+
+            setServoAngle(servoBase, theta1);  // Coxa angle
+            setServoAngle(servoBase + 1, theta2);  // Femur angle
+            setServoAngle(servoBase + 2, theta3);  // Tibia angle
 
             delay(stepDuration);
         }

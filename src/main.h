@@ -5,6 +5,7 @@
 #include <Arduino.h>
 #include "Transforms.h"
 #include "SPI.h"
+#include "Parameters.h"
 
 
 #endif //HEXAPOGBOT_MAIN_H
