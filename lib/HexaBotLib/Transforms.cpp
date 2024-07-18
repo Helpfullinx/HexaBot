@@ -41,13 +41,25 @@ void moveLegs(const Transformation &ts, const int &duration, const int &steps) {
     BLA::Matrix<3,3> R;
 
     // Iterate over legs, calculating their joint rotation values
-    for (int i = 0; i < LEG_COUNT; i++) {
+    for (int i = 0; i < 1; i++) {
         // Calculate rotation matrix for leg
-        rotationMatrix(ts.bodyOrientation(0), ts.bodyOrientation(1), ts.bodyOrientation(2), LEG_ANGLES[i], R);
+        rotationMatrix(ts.bodyOrientation(0), ts.bodyOrientation(1), ts.bodyOrientation(2), R);
 
         // Transforms the start position and end position of the current leg in relation to the body position
-        Point startPosTransformed = R * (ts.startPosition[i] - ts.bodyPosition) + ATTACHMENT_POINTS[i];
-        Point endPosTransformed = R * (ts.endPosition[i] - ts.bodyPosition) + ATTACHMENT_POINTS[i];
+        Serial.print("R = ");
+        Serial.println(R);
+
+        float legAngleRad = radians(LEG_ANGLES[i]);
+        float cos_la = cos(legAngleRad), sin_la = sin(legAngleRad);
+
+        BLA::Matrix<3,3> R_leg = {cos_la, -sin_la, 0,
+                                  sin_la, cos_la, 0,
+                                  0, 0, 1};
+
+        Point startPosTransformed = (R * (ts.startPosition[i] + ts.bodyPosition) - ATTACHMENT_POINTS[i]);
+        Point endPosTransformed = (R * (ts.endPosition[i] + ts.bodyPosition) - ATTACHMENT_POINTS[i]);
+        Serial.print("startPosTrans = ");
+        Serial.println(startPosTransformed);
 
         // Calculate step duration for current lerp step
         float stepDuration = (float) duration / steps;  // duration is in milliseconds
@@ -57,10 +69,12 @@ void moveLegs(const Transformation &ts, const int &duration, const int &steps) {
             float t = (float) j / steps; // How far we are into the lerp
 
             // Calculates lerp step
-            Point stepPos = startPosTransformed + (endPosTransformed - startPosTransformed) * t;
+            Point stepPos = startPosTransformed + ((endPosTransformed - startPosTransformed) * t);
+            Serial.print("stepPos =");
+            Serial.println(stepPos);
 
             // Updates Z position to follow arc. Adjust height as needed (millimeters).
-            stepPos(2) += (sin(t * M_PI) * 50);
+            //stepPos(2) += (sin(t * M_PI) * 50);
 
             // Resultant angle values
             float theta1, theta2, theta3;

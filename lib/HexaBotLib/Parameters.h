@@ -24,7 +24,7 @@ typedef BLA::Matrix<3> Point;
 typedef BLA::Matrix<3> EulerRotation;
 
 // Clockwise orientation of each leg's frame in reference to the body frame.
-const float LEG_ANGLES[LEG_COUNT] = {-45, -90, -135, -225, -270, -315};
+const float LEG_ANGLES[LEG_COUNT] = {-45.0, -90.0, -135.0, -225.0, -270.0, -315.0};
 
 // Where each leg attaches to the body in respect to the center point of the body.
 // First leg is top right, then clockwise after.

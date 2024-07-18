@@ -6,6 +6,6 @@
 using namespace BLA;
 
 void inverseKinematics(const float &x, const float &y, const float &z, float &theta1, float &theta2, float &theta3);
-void rotationMatrix(const float &roll, const float &pitch, const float &yaw, const float &legAngle, BLA::Matrix<3,3> &R);
+void rotationMatrix(const float &roll, const float &pitch, const float &yaw, BLA::Matrix<3,3> &R);
 
 #endif //HEXAPOGBOT_INVERSEKINEMATICS_H

@@ -10,36 +10,7 @@ void setup() {
 
     servoSetup();
 
-    Point startPositions[LEG_COUNT] = {
-            {100, 100, 0},
-            {0, 0, 0},
-            {0, 0, 0},
-            {0, 0, 0},
-            {0, 0, 0},
-            {0, 0, 0}
-    };
-
-    Point endPositions[LEG_COUNT] = {
-            {150, 150, 0},
-            {0, 0, 0},
-            {0, 0, 0},
-            {0, 0, 0},
-            {0, 0, 0},
-            {0, 0, 0}
-    };
-
-    Point bodyPos = {0, 0, 0};
-    EulerRotation bodyOrientation = {0, 0, 0};
-
-    Transformation t = {
-            bodyPos,
-            bodyOrientation,
-            startPositions,
-            endPositions
-    };
-
-
-    moveLegs(t, 10000, 50);
+    delay(1000);
 }
 
 void loop() {
@@ -58,5 +29,36 @@ void loop() {
 //    }
 //
 //    delay(500);
+
+    Point startPositions[LEG_COUNT] = {
+            {250, 250, 0},
+            {0, 0, 0},
+            {0, 0, 0},
+            {0, 0, 0},
+            {0, 0, 0},
+            {0, 0, 0}
+    };
+
+    Point endPositions[LEG_COUNT] = {
+            {270, 270, 0},
+            {0, 0, 0},
+            {0, 0, 0},
+            {0, 0, 0},
+            {0, 0, 0},
+            {0, 0, 0}
+    };
+
+    Point bodyPos = {0, 0, 0};
+    EulerRotation bodyOrientation = {0, 0, 0};
+
+    Transformation t = {
+            bodyPos,
+            bodyOrientation,
+            startPositions,
+            endPositions
+    };
+
+
+    moveLegs(t, 10000, 500);
 
 }
