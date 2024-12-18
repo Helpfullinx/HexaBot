@@ -14,24 +14,8 @@ void setup() {
 }
 
 void loop() {
-
-
-    // Drive each servo one at a time using setPWM()
-//    Serial.printf("Servo_Min = %i", SERVO_MIN);
-//    Serial.printf("Servo_Max = %i", SERVO_MAX);
-//    for (uint16_t pulselen = SERVO_MIN; pulselen < SERVO_MAX; pulselen++) {
-//        pwm1.setPWM(servonum, 0, pulselen);
-//    }
-//
-//    delay(500);
-//    for (uint16_t pulselen = SERVO_MAX; pulselen > SERVO_MIN; pulselen--) {
-//        pwm1.setPWM(servonum, 0, pulselen);
-//    }
-//
-//    delay(500);
-
     Point startPositions[LEG_COUNT] = {
-            {250, 250, 0},
+            {200, 250, 150},
             {0, 0, 0},
             {0, 0, 0},
             {0, 0, 0},
@@ -40,7 +24,7 @@ void loop() {
     };
 
     Point endPositions[LEG_COUNT] = {
-            {270, 270, 0},
+            {80, 250, 150},
             {0, 0, 0},
             {0, 0, 0},
             {0, 0, 0},
@@ -58,7 +42,17 @@ void loop() {
             endPositions
     };
 
+    int moveDuration = 100;
 
-    moveLegs(t, 10000, 500);
+    moveLegs(t, moveDuration, 100);
 
+    t.startPosition[0] = {80, 250, 150};
+    t.endPosition[0] = {165, 250, 60};
+
+    moveLegs(t, moveDuration, 100);
+
+    t.startPosition[0] = {165, 250, 60};
+    t.endPosition[0] = {200, 250, 150};
+
+    moveLegs(t, moveDuration, 100);
 }

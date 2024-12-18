@@ -46,8 +46,8 @@ void moveLegs(const Transformation &ts, const int &duration, const int &steps) {
         rotationMatrix(ts.bodyOrientation(0), ts.bodyOrientation(1), ts.bodyOrientation(2), R);
 
         // Transforms the start position and end position of the current leg in relation to the body position
-        Serial.print("R = ");
-        Serial.println(R);
+//        Serial.print("R = ");
+//        Serial.println(R);
 
         float legAngleRad = radians(LEG_ANGLES[i]);
         float cos_la = cos(legAngleRad), sin_la = sin(legAngleRad);
@@ -56,10 +56,10 @@ void moveLegs(const Transformation &ts, const int &duration, const int &steps) {
                                   sin_la, cos_la, 0,
                                   0, 0, 1};
 
-        Point startPosTransformed = (R * (ts.startPosition[i] + ts.bodyPosition) - ATTACHMENT_POINTS[i]);
-        Point endPosTransformed = (R * (ts.endPosition[i] + ts.bodyPosition) - ATTACHMENT_POINTS[i]);
-        Serial.print("startPosTrans = ");
-        Serial.println(startPosTransformed);
+        Point startPosTransformed = (R * R_leg * (ts.startPosition[i] + ts.bodyPosition) - ATTACHMENT_POINTS[i]);
+        Point endPosTransformed = (R * R_leg * (ts.endPosition[i] + ts.bodyPosition) - ATTACHMENT_POINTS[i]);
+//        Serial.print("startPosTrans = ");
+//        Serial.println(startPosTransformed);
 
         // Calculate step duration for current lerp step
         float stepDuration = (float) duration / steps;  // duration is in milliseconds
@@ -70,8 +70,8 @@ void moveLegs(const Transformation &ts, const int &duration, const int &steps) {
 
             // Calculates lerp step
             Point stepPos = startPosTransformed + ((endPosTransformed - startPosTransformed) * t);
-            Serial.print("stepPos =");
-            Serial.println(stepPos);
+//            Serial.print("stepPos =");
+//            Serial.println(stepPos);
 
             // Updates Z position to follow arc. Adjust height as needed (millimeters).
             //stepPos(2) += (sin(t * M_PI) * 50);
@@ -84,9 +84,9 @@ void moveLegs(const Transformation &ts, const int &duration, const int &steps) {
             int servoBase = i * 3 + 1;  // Assuming servos are numbered sequentially
 
             // Set the servo angles
-            Serial.printf("%d, %f\n\r", servoBase, theta1);
-            Serial.printf("%d, %f\n\r", servoBase + 1, theta2);
-            Serial.printf("%d, %f\n\r", servoBase + 2, theta3);
+//            Serial.printf("%d, %f\n\r", servoBase, theta1);
+//            Serial.printf("%d, %f\n\r", servoBase + 1, theta2);
+//            Serial.printf("%d, %f\n\r", servoBase + 2, theta3);
 
             setServoAngle(servoBase, theta1);  // Coxa angle
             setServoAngle(servoBase + 1, theta2);  // Femur angle

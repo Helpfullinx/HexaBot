@@ -29,10 +29,10 @@ void inverseKinematics(const float &x, const float &y, const float &z, float &th
         theta3 = 180 - degrees(b1);
 
         // Convert to degrees
-        theta1 = degrees(theta1) + 90.0 - 45;
+        theta1 = degrees(theta1) + 90.0;
     } else {
         Serial.println("MATH ERROR: coordinate beyond range of leg...");
-        theta1 = degrees(atan2(y, x)) + 90.0 - 45;
+        theta1 = degrees(atan2(y, x)) + 90.0;
         theta2 = 90;
         theta3 = 0;
     }
